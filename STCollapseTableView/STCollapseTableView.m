@@ -288,6 +288,14 @@
 
 #pragma mark - Delegate
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.collapseDelegate && [self.collapseDelegate respondsToSelector:_cmd])
+    {
+        [self.collapseDelegate tableView:tableView didSelectRowAtIndexPath:indexPath];
+    }
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView* view = [self.collapseDelegate tableView:tableView viewForHeaderInSection:section];
