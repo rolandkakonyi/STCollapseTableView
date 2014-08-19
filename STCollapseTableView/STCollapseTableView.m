@@ -100,6 +100,10 @@
 
 - (id)forwardingTargetForSelector:(SEL)aSelector
 {
+    if ([super respondsToSelector:aSelector])
+    {
+        return self;
+    }
 	if ([self.collapseDataSource respondsToSelector:aSelector])
     {
 		return self.collapseDataSource;
@@ -113,12 +117,9 @@
 
 - (BOOL)respondsToSelector:(SEL)aSelector
 {
-    if (sel_isEqual(aSelector, @selector(tableView:viewForHeaderInSection:)))
-    {
-        return [self.collapseDelegate respondsToSelector:aSelector];
-    }
-    
-	return [super respondsToSelector:aSelector] || [self.collapseDataSource respondsToSelector:aSelector] || [self.collapseDelegate respondsToSelector:aSelector];
+	return [super respondsToSelector:aSelector] ||
+    [self.collapseDataSource respondsToSelector:aSelector] ||
+    [self.collapseDelegate respondsToSelector:aSelector];
 }
 
 - (void)openSection:(NSUInteger)sectionIndex animated:(BOOL)animated
@@ -302,17 +303,6 @@
     
     if (self.shouldHandleHeadersTap)
     {
-        NSArray* gestures = view.gestureRecognizers;
-        BOOL tapGestureFound = NO;
-        for (UIGestureRecognizer* gesture in gestures)
-        {
-            if ([gesture isKindOfClass:[UITapGestureRecognizer class]])
-            {
-                tapGestureFound = YES;
-                break;
-            }
-        }
-        
         [view setTag:section];
         [view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)]];
     }
