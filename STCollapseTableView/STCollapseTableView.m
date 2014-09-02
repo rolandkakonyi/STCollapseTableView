@@ -117,6 +117,9 @@
 
 - (BOOL)respondsToSelector:(SEL)aSelector
 {
+	if(aSelector == NULL)
+		return NO;
+
 	return [super respondsToSelector:aSelector] ||
     [self.collapseDataSource respondsToSelector:aSelector] ||
     [self.collapseDelegate respondsToSelector:aSelector];
