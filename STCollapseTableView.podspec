@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.homepage         = "https://github.com/iSofTom/STCollapseTableView"
   s.license          = 'MIT'
   s.author           = { "iSotTom" => "thomas@isoftom.com" }
-  s.source           = { :git => "https://github.com/iSofTom/STCollapseTableView.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/rolandkakonyi/STCollapseTableView.git", :tag => s.version.to_s }
 
   s.platform     = :ios, '5.0'
   s.requires_arc = true
